@@ -1,0 +1,84 @@
+.burst {
+  position: fixed;
+  width: 0;
+  height: 0;
+  z-index: 80;
+  pointer-events: none;
+}
+
+.burst__flash {
+  position: absolute;
+  left: -70px;
+  top: -70px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 244, 190, 0.95), rgba(212, 175, 55, 0.45) 40%, transparent 70%);
+  animation: burst-flash 0.8s ease-out forwards;
+}
+
+.burst__ring {
+  position: absolute;
+  left: -30px;
+  top: -30px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #ffe9a8;
+  box-shadow: 0 0 16px rgba(255, 220, 120, 0.8);
+  animation: burst-ring 1s ease-out forwards;
+}
+
+.burst__spark {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--s);
+  height: var(--s);
+  margin: calc(var(--s) / -2) 0 0 calc(var(--s) / -2);
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff6c8, #d4af37 60%, transparent);
+  box-shadow: 0 0 8px 2px rgba(255, 210, 90, 0.8);
+  opacity: 0;
+  animation: burst-spark var(--t) cubic-bezier(0.1, 0.7, 0.3, 1) var(--delay) forwards;
+}
+
+.burst__spark--star {
+  border-radius: 0;
+  box-shadow: none;
+  background: #fff2b8;
+  clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+}
+
+@keyframes burst-flash {
+  0% {
+    transform: scale(0.3);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes burst-ring {
+  0% {
+    transform: scale(0.4);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(4.2);
+    opacity: 0;
+  }
+}
+
+@keyframes burst-spark {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy)) scale(0.2);
+    opacity: 0;
+  }
+}

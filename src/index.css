@@ -1,0 +1,132 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;600;700;800&display=swap');
+:root {
+  --ink: #120c08;
+  --brown-900: #1b110b;
+  --brown-800: #2a1b11;
+  --brown-700: #3d2816;
+  --gold: #d4af37;
+  --gold-soft: #e8cf87;
+  --gold-deep: #a67c1e;
+  --parchment: #f1e4c3;
+  --parchment-dark: #d9c394;
+  --night: #0c1030;
+  --magic: #6f5bd6;
+
+  --font-body: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Iowan Old Style', Georgia, serif;
+  --font-display: 'Trajan Pro', 'Cinzel', Copperplate, 'Copperplate Gothic Light',
+    'Palatino Linotype', Georgia, serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  background: var(--ink);
+  color: var(--parchment);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul {
+  margin: 0;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* ---------- Shared helpers ---------- */
+.gold-text {
+  background: linear-gradient(180deg, #fff2b8 0%, var(--gold) 55%, var(--gold-deep) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+}
+
+.btn-gold {
+  display: inline-block;
+  padding: 0.85rem 1.8rem;
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  background: linear-gradient(145deg, rgba(61, 40, 22, 0.9), rgba(27, 17, 11, 0.9));
+  color: var(--gold-soft);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 0 0 18px rgba(212, 175, 55, 0.18);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+}
+
+.btn-gold:hover {
+  transform: translateY(-3px);
+  color: #fff2b8;
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.45);
+}
+
+.site-footer {
+  position: relative;
+  z-index: 1;
+  padding: 2.5rem 1rem 3rem;
+  text-align: center;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  color: var(--parchment-dark);
+  background: var(--ink);
+  border-top: 1px solid rgba(212, 175, 55, 0.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

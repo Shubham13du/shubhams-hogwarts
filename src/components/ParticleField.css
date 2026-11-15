@@ -1,0 +1,71 @@
+.particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.particles--fixed {
+  position: fixed;
+  z-index: 3;
+}
+
+.particle {
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  animation-delay: var(--delay);
+  animation-duration: var(--dur);
+  animation-iteration-count: infinite;
+}
+
+/* Twinkling stars */
+.particles--stars .particle {
+  left: var(--x);
+  top: var(--y);
+  background: #fff;
+  box-shadow: 0 0 6px 1px rgba(255, 255, 255, 0.7);
+  animation-name: twinkle;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: scale(0.7);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* Rising embers */
+.particles--embers .particle {
+  left: var(--x);
+  bottom: -12px;
+  background: radial-gradient(circle, #fff6c8 0%, var(--gold) 55%, transparent 100%);
+  box-shadow: 0 0 8px 2px rgba(212, 175, 55, 0.55);
+  opacity: 0;
+  animation-name: rise;
+  animation-timing-function: linear;
+}
+
+@keyframes rise {
+  0% {
+    transform: translate(0, 0) scale(0.6);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.85;
+  }
+  80% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(var(--drift), -110vh) scale(1.1);
+    opacity: 0;
+  }
+}

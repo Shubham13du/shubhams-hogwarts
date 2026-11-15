@@ -1,0 +1,200 @@
+
+.frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  isolation: isolate;
+}
+
+.frame__aura {
+  position: absolute;
+  inset: -19%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(232, 194, 91, 0.38),
+    rgba(111, 91, 214, 0.23) 48%,
+    transparent 72%
+  );
+  animation: frame-aura 5s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes frame-aura {
+  from {
+    opacity: 0.55;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+
+.frame__gold {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 20deg,
+    #755015,
+    #f9e7a5,
+    #b88b27,
+    #fff4cb,
+    #8a641a,
+    #f0d58b,
+    #a67c1e,
+    #fff0b0,
+    #755015
+  );
+  box-shadow:
+    0 0 0 2px #4a3410,
+    0 0 24px rgba(212, 175, 55, 0.55),
+    0 0 48px rgba(212, 175, 55, 0.20),
+    inset 0 0 14px rgba(0, 0, 0, 0.45);
+  animation: gold-glow 4s ease-in-out infinite alternate;
+}
+
+@keyframes gold-glow {
+  from {
+    filter: brightness(0.95);
+    box-shadow:
+      0 0 0 2px #4a3410,
+      0 0 20px rgba(212, 175, 55, 0.4),
+      inset 0 0 14px rgba(0, 0, 0, 0.45);
+  }
+  to {
+    filter: brightness(1.12);
+    box-shadow:
+      0 0 0 2px #4a3410,
+      0 0 32px rgba(255, 220, 130, 0.65),
+      0 0 50px rgba(212, 175, 55, 0.25),
+      inset 0 0 14px rgba(0, 0, 0, 0.45);
+  }
+}
+
+.frame__ornament {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.frame__beads {
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+  animation: frame-spin 120s linear infinite;
+}
+
+@keyframes frame-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.frame__groove {
+  position: absolute;
+  inset: 12%;
+  border-radius: 50%;
+  border: 3px solid #2a1b0a;
+  box-shadow:
+    0 0 0 2px #d4af37,
+    0 0 10px rgba(212, 175, 55, 0.3),
+    inset 0 0 18px rgba(0, 0, 0, 0.7);
+}
+
+.frame__photo {
+  position: absolute;
+  inset: 14%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #120c08;
+  box-shadow:
+    inset 0 0 12px rgba(0, 0, 0, 0.7),
+    0 0 12px rgba(212, 175, 55, 0.25);
+}
+
+.frame__photo img,
+.frame__fallback {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 25%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frame__aura,
+  .frame__gold,
+  .frame__beads {
+    animation: none;
+  }
+}
+/* ===== ORNATE ANTIQUE GOLD FRAME REFINEMENT ===== */
+
+.frame {
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.35));
+}
+
+.frame__gold {
+  box-shadow:
+    0 0 0 2px #2d1d06,
+    0 0 0 4px rgba(212, 175, 55, 0.4),
+    0 0 0 7px rgba(70, 45, 12, 0.9),
+    0 0 0 9px rgba(232, 207, 135, 0.45),
+    0 12px 34px rgba(0, 0, 0, 0.6),
+    0 0 44px rgba(212, 175, 55, 0.28),
+    inset 0 0 18px rgba(0, 0, 0, 0.5);
+}
+
+/* Moving light sweep, without rotating the frame */
+.frame__gold::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 265deg,
+    rgba(255, 248, 210, 0.9) 290deg,
+    rgba(255, 220, 120, 0.2) 310deg,
+    transparent 330deg
+  );
+  -webkit-mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 5px),
+    #000 calc(100% - 4px)
+  );
+  mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 5px),
+    #000 calc(100% - 4px)
+  );
+  animation: frame-light-sweep 7s linear infinite;
+  pointer-events: none;
+}
+
+.frame__ornament {
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.6));
+}
+
+/* Keep the decorative frame itself stable */
+.frame__beads {
+  animation: none !important;
+}
+
+@keyframes frame-light-sweep {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frame__gold::after {
+    animation: none;
+  }
+}

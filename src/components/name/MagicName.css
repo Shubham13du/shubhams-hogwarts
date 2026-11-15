@@ -1,0 +1,591 @@
+/* ================= The Magic Within My Name ================= */
+.magic {
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.magic__intro {
+  max-width: 56ch;
+  margin: 0 auto 1.3rem;
+  color: var(--parchment);
+}
+
+.magic__count {
+  margin-bottom: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+}
+
+.magic__bar {
+  height: 4px;
+  max-width: 420px;
+  margin: 0 auto;
+  border-radius: 2px;
+  background: rgba(212, 175, 55, 0.2);
+  overflow: hidden;
+}
+
+.magic__bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold-deep), #fff2b8);
+  transition: width 0.5s ease;
+}
+
+.magic__prompt {
+  margin-top: 0.5rem;
+  font-style: italic;
+  color: var(--parchment-dark);
+}
+
+/* ---------- Letter tiles ---------- */
+.magic__letters {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: clamp(0.3rem, 1.6vw, 0.9rem);
+  margin: 1.5rem 0 1.6rem;
+}
+
+/* thin golden thread running behind the tiles */
+.magic__letters::before {
+  content: '';
+  position: absolute;
+  left: 2%;
+  right: 2%;
+  top: 50%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.7), transparent);
+}
+
+.magic-tile {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  aspect-ratio: 3 / 4;
+  padding: 0;
+  border-radius: 999px 999px 10px 10px; /* arched, like a castle window */
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  background: linear-gradient(180deg, #24184f, #0f0c2b);
+  color: var(--gold-soft);
+  font-family: var(--font-display);
+  box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+
+.magic-tile__letter {
+  font-size: clamp(1.3rem, 5.5vw, 2.6rem);
+  line-height: 1;
+}
+
+.magic-tile__symbol {
+  min-height: 1.2em;
+  font-size: clamp(0.75rem, 3vw, 1.3rem);
+  opacity: 0.85;
+}
+
+.magic-tile:hover {
+  transform: translateY(-4px);
+  border-color: var(--a);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--a) 60%, transparent);
+}
+
+.magic-tile.is-discovered {
+  border-color: var(--a);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--a) 30%, #1a1440), #0f0c2b);
+}
+
+.magic-tile.is-selected {
+  transform: translateY(-6px) scale(1.06);
+  color: #fff8d6;
+  border-color: var(--a);
+  box-shadow: 0 0 0 2px var(--a), 0 0 28px color-mix(in srgb, var(--a) 80%, transparent);
+}
+
+/* ---------- Letter detail card ---------- */
+.magic-detail {
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+  border-radius: 14px;
+  border: 2px solid var(--a);
+  background:
+    radial-gradient(ellipse at 15% 0%, color-mix(in srgb, var(--a) 22%, transparent), transparent 60%),
+    linear-gradient(180deg, var(--brown-800), var(--brown-900));
+  box-shadow: 0 0 36px color-mix(in srgb, var(--a) 35%, transparent);
+}
+
+.magic-detail__ghost {
+  position: absolute;
+  right: 0.6rem;
+  bottom: -1.6rem;
+  font-family: var(--font-display);
+  font-size: clamp(8rem, 28vw, 16rem);
+  line-height: 1;
+  color: var(--a);
+  opacity: 0.07;
+  pointer-events: none;
+  user-select: none;
+}
+
+.magic-detail__inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: clamp(1rem, 4vw, 2rem);
+  padding: clamp(1.1rem, 3vw, 1.8rem);
+}
+
+.magic-detail__top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.magic-detail__letter {
+  font-family: var(--font-display);
+  font-size: clamp(3.8rem, 12vw, 6rem);
+  line-height: 1;
+  color: var(--a);
+  text-shadow: 0 0 26px color-mix(in srgb, var(--a) 70%, transparent);
+}
+
+.magic-detail__symbol {
+  font-size: clamp(2rem, 6vw, 3rem);
+  animation: magic-float 3.5s ease-in-out infinite;
+}
+
+@keyframes magic-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.magic-detail__eyebrow {
+  letter-spacing: 0.25em;
+  font-size: 0.7rem;
+}
+
+.magic-detail__character {
+  margin: 0.2rem 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  letter-spacing: 0.04em;
+  color: #fff2b8;
+}
+
+.magic-detail__trait {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  color: var(--a);
+}
+
+.magic-detail__match {
+  display: inline-block;
+  margin: 0.6rem 0 0.8rem;
+  padding: 0.15rem 0.8rem;
+  border: 1px solid var(--a);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  color: var(--parchment-dark);
+}
+
+.magic-detail__match.is-thematic {
+  border-style: dashed;
+}
+
+.magic-detail__text {
+  line-height: 1.75;
+}
+
+/* Beats `.chips { justify-content: center }` from HogwartsMap.css */
+.magic-detail .magic-detail__traits {
+  justify-content: flex-start;
+  margin: 1rem 0 0;
+}
+
+.magic-detail__nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.8rem;
+  margin-top: 1.3rem;
+}
+
+.magic-detail__nav .btn-gold {
+  cursor: pointer;
+}
+
+/* ---------- Seven different reveal animations ---------- */
+.magic-reveal--smoke {
+  animation: magic-smoke 1s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+}
+.magic-reveal--pages {
+  transform-origin: left center;
+  animation: magic-pages 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+}
+.magic-reveal--sprout {
+  transform-origin: bottom center;
+  animation: magic-sprout 0.9s cubic-bezier(0.3, 1.5, 0.5, 1) backwards;
+}
+.magic-reveal--spark {
+  animation: magic-spark 1s ease-out backwards;
+}
+.magic-reveal--bolt {
+  animation: magic-bolt 0.9s ease-out backwards;
+}
+.magic-reveal--candle {
+  animation: magic-candle 1.2s ease-in-out backwards;
+}
+.magic-reveal--pounce {
+  animation: magic-pounce 0.9s cubic-bezier(0.25, 0.9, 0.3, 1) backwards;
+}
+
+/* S: potion vapour drifting up */
+@keyframes magic-smoke {
+  from {
+    opacity: 0;
+    filter: blur(14px);
+    transform: translateY(28px) scale(1.06);
+  }
+}
+
+/* H: a book page turning open */
+@keyframes magic-pages {
+  from {
+    opacity: 0;
+    transform: perspective(900px) rotateY(-80deg);
+  }
+}
+
+/* U: slow growth from the ground, with a little overshoot */
+@keyframes magic-sprout {
+  from {
+    opacity: 0;
+    transform: scaleY(0.05) translateY(40px);
+  }
+}
+
+/* B: a burst of embers */
+@keyframes magic-spark {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+    box-shadow: 0 0 0 rgba(255, 140, 60, 0);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.04);
+    box-shadow: 0 0 60px 14px rgba(255, 140, 60, 0.65);
+  }
+}
+
+/* H: a quick bright flash with a shake */
+@keyframes magic-bolt {
+  0% {
+    opacity: 0;
+    filter: brightness(4);
+  }
+  10% {
+    opacity: 1;
+    filter: brightness(4);
+    transform: translateX(-5px) skewX(-3deg);
+  }
+  20% {
+    filter: brightness(2.2);
+    transform: translateX(6px) skewX(2deg);
+  }
+  32% {
+    filter: brightness(1);
+    transform: none;
+  }
+}
+
+/* A: candle flicker */
+@keyframes magic-candle {
+  0% {
+    opacity: 0;
+    box-shadow: 0 0 0 rgba(255, 200, 100, 0);
+  }
+  25% {
+    opacity: 0.6;
+  }
+  40% {
+    opacity: 0.3;
+  }
+  55% {
+    opacity: 0.95;
+    box-shadow: 0 0 50px 8px rgba(255, 200, 100, 0.5);
+  }
+  70% {
+    opacity: 0.7;
+  }
+}
+
+/* M: a quick graceful pounce */
+@keyframes magic-pounce {
+  0% {
+    opacity: 0;
+    transform: translate(-60px, 10px) scale(0.9) rotate(-3deg);
+  }
+  55% {
+    opacity: 1;
+    transform: translate(8px, -14px) scale(1.02);
+  }
+  78% {
+    transform: translate(0, 3px);
+  }
+}
+
+/* ---------- Finale (after all seven letters) ---------- */
+.magic-finale {
+  margin-top: 1.5rem;
+  padding: clamp(1.1rem, 3vw, 1.8rem);
+  border-radius: 14px;
+  border: 2px double var(--gold-deep);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(111, 91, 214, 0.3), transparent 65%),
+    linear-gradient(180deg, var(--brown-800), var(--brown-900));
+  box-shadow: 0 0 40px rgba(212, 175, 55, 0.25);
+  animation: magic-finale-in 0.8s ease backwards;
+}
+
+@keyframes magic-finale-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+
+.magic-finale__title {
+  margin-bottom: 1rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 4vw, 1.9rem);
+  letter-spacing: 0.08em;
+}
+
+.magic-finale__letters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(0.4rem, 2vw, 0.9rem);
+  margin: 0 0 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.magic-finale__letter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: clamp(38px, 9vw, 56px);
+  padding: 0.4rem 0.3rem;
+  border-radius: 10px;
+  border: 1px solid var(--a);
+  background: color-mix(in srgb, var(--a) 18%, #0f0c2b);
+}
+
+.magic-finale__char {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 4.5vw, 1.9rem);
+  line-height: 1.1;
+  color: #fff2b8;
+}
+
+.magic-finale__symbol {
+  font-size: clamp(0.9rem, 3vw, 1.2rem);
+}
+
+.magic-finale__text {
+  max-width: 56ch;
+  margin: 0 auto 1.2rem;
+  line-height: 1.7;
+  font-style: italic;
+  color: var(--gold-soft);
+}
+
+.magic-finale .btn-gold {
+  cursor: pointer;
+}
+
+/* ================= Mobile ================= */
+@media (max-width: 640px) {
+  .magic-detail__inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .magic-detail__top {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .magic-detail .magic-detail__traits {
+    justify-content: center;
+  }
+
+  .magic-detail__nav .btn-gold {
+    flex: 1 1 100%;
+    text-align: center;
+  }
+}
+
+/* ===== PERSONAL NAME INPUT ===== */
+
+.magic__name-form {
+  max-width: 580px;
+  margin: 1.8rem auto 2rem;
+  padding: 1.2rem;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 14px;
+  background: rgba(15, 12, 43, 0.55);
+}
+
+.magic__name-form label {
+  display: block;
+  margin-bottom: 0.9rem;
+  color: var(--gold-soft);
+  font-family: var(--font-display);
+  letter-spacing: 0.08em;
+}
+
+.magic__name-controls {
+  display: flex;
+  justify-content: center;
+  gap: 0.7rem;
+}
+
+.magic__name-controls input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.8rem 1rem;
+  border: 1px solid rgba(212, 175, 55, 0.55);
+  border-radius: 8px;
+  outline: none;
+  background: #100c2b;
+  color: var(--parchment);
+  font: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.magic__name-controls input:focus {
+  border-color: #fff2b8;
+  box-shadow: 0 0 14px rgba(212, 175, 55, 0.3);
+}
+
+.magic__name-controls button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.magic__hint {
+  margin-top: 0.7rem;
+  color: var(--parchment-dark);
+  font-size: 0.75rem;
+}
+
+/* Dynamic number of letters */
+.magic__letters {
+  grid-template-columns: repeat(auto-fit, minmax(42px, 1fr));
+}
+
+/* Responsive name input */
+@media (max-width: 520px) {
+  .magic__name-controls {
+    flex-direction: column;
+  }
+
+  .magic__name-controls button {
+    width: 100%;
+  }
+
+  .magic__letters {
+    gap: 0.35rem;
+  }
+}
+
+.magic__letters {
+  grid-template-columns: repeat(auto-fit, minmax(42px, 1fr));
+}
+
+.magic__name-form {
+  max-width: 580px;
+  margin: 1.8rem auto 2rem;
+  padding: 1.2rem;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 14px;
+  background: rgba(15, 12, 43, 0.55);
+}
+
+.magic__name-form label {
+  display: block;
+  margin-bottom: 0.9rem;
+  color: var(--gold-soft);
+  font-family: var(--font-display);
+  letter-spacing: 0.08em;
+}
+
+.magic__name-controls {
+  display: flex;
+  justify-content: center;
+  gap: 0.7rem;
+}
+
+.magic__name-controls input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.8rem 1rem;
+  border: 1px solid rgba(212, 175, 55, 0.55);
+  border-radius: 8px;
+  outline: none;
+  background: #100c2b;
+  color: var(--parchment);
+  font: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.magic__name-controls input:focus {
+  border-color: #fff2b8;
+  box-shadow: 0 0 14px rgba(212, 175, 55, 0.3);
+}
+
+.magic__name-controls button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.magic__hint {
+  margin-top: 0.7rem;
+  color: var(--parchment-dark);
+  font-size: 0.75rem;
+}
+
+@media (max-width: 520px) {
+  .magic__name-controls {
+    flex-direction: column;
+  }
+
+  .magic__name-controls button {
+    width: 100%;
+  }
+
+  .magic__letters {
+    gap: 0.35rem;
+  }
+}
