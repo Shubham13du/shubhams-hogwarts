@@ -1,3 +1,4 @@
+
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { NAV_ITEMS, PROFILE } from './data/content';
 import useSectionNavigation from './hooks/useSectionNavigation';
@@ -10,6 +11,9 @@ import MagicBurst from './components/MagicBurst';
 import ParticleField from './components/ParticleField';
 import Intro from './components/Intro';
 import ThankYou from './components/ThankYou';
+import AmbientToggle from './components/AmbientToggle';
+import WandTrail from './components/WandTrail';
+import FloatingCandles from './components/FloatingCandles';
 
 export default function App() {
   const siteRef = useRef(null);
@@ -51,16 +55,22 @@ export default function App() {
 
       <ParticleField variant="embers" count={26} fixed />
 
+      <FloatingCandles />
+      <WandTrail />
+
+      <AmbientToggle />
+
       <div className="site" ref={siteRef}>
         <main>
           <Hero
-  items={NAV_ITEMS}
-  onSelect={openSection}
-  selectedId={selectedId}
-  away={archiveOpen || phase === 'leaving'}
-  busy={busy}
-  introDone={!introVisible}
-/>
+            items={NAV_ITEMS}
+            onSelect={openSection}
+            selectedId={selectedId}
+            away={archiveOpen || phase === 'leaving'}
+            busy={busy}
+            introDone={!introVisible}
+          />
+
           <Welcome />
           <HogwartsMap />
           <ThankYou />
@@ -70,7 +80,7 @@ export default function App() {
           <p>
             © {new Date().getFullYear()} {PROFILE.name} · Made with a little magic and a lot of code ✦
           </p>
-        </footer>
+               </footer>
       </div>
 
       {activeItem && (

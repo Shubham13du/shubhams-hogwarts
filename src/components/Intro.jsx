@@ -1,24 +1,21 @@
-import { useEffect } from 'react';
+
 import './Intro.css';
 
 const LETTERS = 'SHUBHAM'.split('');
 
 export default function Intro({ onComplete }) {
-  useEffect(() => {
-    const reduced = window.matchMedia?.(
-      '(prefers-reduced-motion: reduce)'
-    ).matches;
-
-    const timer = window.setTimeout(
-      onComplete,
-      reduced ? 500 : 3900
-    );
-
-    return () => window.clearTimeout(timer);
-  }, [onComplete]);
+  const handleEnter = () => {
+    // Start music during the visitor's Enter click.
+    window.dispatchEvent(new Event('hogwarts-enter'));
+    onComplete();
+  };
 
   return (
-    <div className="intro" role="status" aria-label="Welcome to Shubham's portfolio">
+    <div
+      className="intro"
+      role="dialog"
+      aria-label="Welcome to Shubham's portfolio"
+    >
       <div className="intro__stars" aria-hidden="true">
         {Array.from({ length: 28 }, (_, i) => (
           <span
@@ -48,11 +45,24 @@ export default function Intro({ onComplete }) {
 
         <h1 className="intro__title">
           {LETTERS.map((letter, i) => (
-            <span key={i} style={{ '--i': i }}>{letter}</span>
+            <span key={i} style={{ '--i': i }}>
+              {letter}
+            </span>
           ))}
         </h1>
 
-        <p className="intro__subtitle">A little magic awaits...</p>
+        <p className="intro__subtitle">
+          A little magic awaits...
+        </p>
+
+        <button
+          type="button"
+          className="intro__enter"
+          onClick={handleEnter}
+        >
+          Enter Hogwarts
+          <span aria-hidden="true"> ✦</span>
+        </button>
       </div>
     </div>
   );

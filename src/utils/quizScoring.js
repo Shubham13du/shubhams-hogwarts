@@ -49,7 +49,7 @@ export function validateQuizData(questions, characters, houses, tieBreakOrder = 
   const problems = [];
   const ids = new Set(characters.map((character) => character.id));
 
-  if (questions.length !== 6) problems.push(`Expected 6 questions, found ${questions.length}.`);
+  if (questions.length < 6) problems.push(`Expected at least 6 questions in the question pool, found ${questions.length}.`);
 
   questions.forEach((question, q) => {
     if (question.options.length !== 4) {

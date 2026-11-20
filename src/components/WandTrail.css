@@ -1,0 +1,42 @@
+.wand-trail {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.wand-trail__particle {
+  position: absolute;
+  color: #ffe6a0;
+  font-size: 17px;
+  line-height: 1;
+  text-shadow:
+    0 0 5px #fff0bd,
+    0 0 12px #e6a83d,
+    0 0 22px #d58a24;
+  animation: wand-sparkle 850ms ease-out forwards;
+}
+
+@keyframes wand-sparkle {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.3) rotate(0deg);
+  }
+
+  25% {
+    opacity: 1;
+    transform: translate(-50%, -65%) scale(1.2) rotate(45deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -115%) scale(0.1) rotate(130deg);
+  }
+}
+
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .wand-trail {
+    display: none;
+  }
+}

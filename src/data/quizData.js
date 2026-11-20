@@ -11,7 +11,7 @@
 // HOW TO EDIT
 //  - Change any text freely.
 //  - To keep the quiz fair, give every character a few answers worth 3 points.
-//  - Keep exactly 4 options per question and exactly 6 questions.
+//  - Keep exactly 4 options per question; each round draws 6 from the pool.
 // =====================================================================
 
 export const HOUSES = {
@@ -160,7 +160,7 @@ export const CHARACTERS = [
 ];
 
 // ---------------------------------------------------------------------
-// QUESTIONS (exactly 6, each with exactly 4 options)
+// QUESTIONS (12-question pool; each round uses 6, each with exactly 4 options)
 // ---------------------------------------------------------------------
 export const QUESTIONS = [
   {
@@ -295,4 +295,64 @@ export const QUESTIONS = [
       },
     ],
   },
+  {
+    id: 'team',
+    prompt: 'Your group is given a difficult task. What role do you naturally take?',
+    options: [
+      { text: 'I step forward and keep everyone moving.', scores: { harry: 3, ron: 1, neville: 1 } },
+      { text: 'I organise the plan and make sure nothing is missed.', scores: { hermione: 3, dumbledore: 1 } },
+      { text: 'I look for an unusual solution nobody has considered.', scores: { luna: 3, dumbledore: 1 } },
+      { text: 'I quietly take responsibility for the hardest part.', scores: { snape: 2, draco: 2, neville: 2 } },
+    ],
+  },
+  {
+    id: 'clue',
+    prompt: 'You find a mysterious note tucked inside an old book. What interests you most?',
+    options: [
+      { text: 'The hidden history behind whoever wrote it.', scores: { hermione: 2, dumbledore: 3 } },
+      { text: 'The chance that it leads to an adventure.', scores: { harry: 3, ron: 2 } },
+      { text: 'The strange symbols and what they might mean.', scores: { luna: 3, hagrid: 1 } },
+      { text: 'The secret advantage the information could give me.', scores: { draco: 3, voldemort: 2, snape: 1 } },
+    ],
+  },
+  {
+    id: 'setback',
+    prompt: 'A plan you worked hard on does not go as expected. What is your next move?',
+    options: [
+      { text: 'Review what went wrong and build a better plan.', scores: { hermione: 3, dumbledore: 2 } },
+      { text: 'Try again, even if I have to start from the beginning.', scores: { neville: 3, harry: 2 } },
+      { text: 'Ask a friend to help me see it differently.', scores: { ron: 3, hagrid: 2 } },
+      { text: 'Keep my thoughts to myself and adapt quietly.', scores: { snape: 3, draco: 1 } },
+    ],
+  },
+  {
+    id: 'common-room',
+    prompt: 'Which corner of the castle would you choose for a free afternoon?',
+    options: [
+      { text: 'A lively table full of friends and conversation.', scores: { ron: 3, hagrid: 2 } },
+      { text: 'A quiet study space with books and notes.', scores: { hermione: 3, snape: 1 } },
+      { text: 'A window seat with a view of the grounds and sky.', scores: { luna: 3, neville: 1 } },
+      { text: 'A private room where I can work towards my ambitions.', scores: { draco: 3, voldemort: 2 } },
+    ],
+  },
+  {
+    id: 'lesson',
+    prompt: 'Which lesson would you be most excited to attend?',
+    options: [
+      { text: 'Defence Against the Dark Arts: practical courage matters.', scores: { harry: 3, neville: 2 } },
+      { text: 'Charms: small details can create wonderful results.', scores: { hermione: 2, dumbledore: 2 } },
+      { text: 'Care of Magical Creatures: every creature deserves care.', scores: { hagrid: 3, luna: 2 } },
+      { text: 'Potions: precision, patience and mastery.', scores: { snape: 3, draco: 1 } },
+    ],
+  },
+  {
+    id: 'legacy',
+    prompt: 'What would you most like people to remember about you?',
+    options: [
+      { text: 'That I stood by people when it mattered.', scores: { harry: 3, ron: 2, hagrid: 1 } },
+      { text: 'That I made knowledge and learning matter.', scores: { hermione: 3, dumbledore: 2 } },
+      { text: 'That I stayed true to myself, even when I was different.', scores: { luna: 3, neville: 1 } },
+      { text: 'That I achieved something remarkable through determination.', scores: { draco: 2, voldemort: 2, snape: 2 } },
+    ],
+  }
 ];

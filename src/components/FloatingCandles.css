@@ -1,0 +1,120 @@
+.floating-candles {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.floating-candle {
+  position: absolute;
+  left: var(--left);
+  bottom: -90px;
+  width: 18px;
+  height: 65px;
+  opacity: 0;
+  animation: candle-float var(--duration) var(--delay) linear infinite;
+}
+
+.floating-candle__body {
+  position: absolute;
+  bottom: 0;
+  left: 5px;
+  width: 9px;
+  height: var(--candle-height);
+  border-radius: 3px 3px 2px 2px;
+  background: linear-gradient(
+    90deg,
+    #8d642b,
+    #fff0bd 45%,
+    #d7a64c 75%,
+    #70451b
+  );
+  box-shadow: 0 0 8px rgba(255, 204, 112, .25);
+}
+
+.floating-candle__wick {
+  position: absolute;
+  bottom: calc(var(--candle-height) - 1px);
+  left: 9px;
+  width: 2px;
+  height: 7px;
+  background: #3b2614;
+}
+
+.floating-candle__flame {
+  position: absolute;
+  left: 5px;
+  bottom: calc(var(--candle-height) + 5px);
+  width: 10px;
+  height: 19px;
+  border-radius: 50% 50% 45% 45%;
+  background: radial-gradient(
+    ellipse at 50% 70%,
+    #fffbd0 0%,
+    #ffd66e 35%,
+    #f28a27 72%,
+    transparent 100%
+  );
+  filter: drop-shadow(0 0 7px #ffbd52);
+  transform-origin: center bottom;
+  animation: candle-flicker 1.4s ease-in-out infinite alternate;
+}
+
+.floating-candle__glow {
+  position: absolute;
+  left: -9px;
+  bottom: calc(var(--candle-height) - 5px);
+  width: 36px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 177, 65, .12);
+  filter: blur(12px);
+}
+
+@keyframes candle-float {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) rotate(-3deg);
+  }
+
+  12% {
+    opacity: .75;
+  }
+
+  50% {
+    transform: translate3d(18px, -55vh, 0) rotate(4deg);
+  }
+
+  85% {
+    opacity: .65;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(-12px, -115vh, 0) rotate(-4deg);
+  }
+}
+
+@keyframes candle-flicker {
+  from {
+    transform: scale(.9) rotate(-5deg);
+    opacity: .8;
+  }
+
+  to {
+    transform: scale(1.08) rotate(5deg);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floating-candle,
+  .floating-candle__flame {
+    animation: none;
+  }
+
+  .floating-candle {
+    opacity: .5;
+  }
+}

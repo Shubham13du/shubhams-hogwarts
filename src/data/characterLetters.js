@@ -203,3 +203,31 @@ export const MAGIC_REVEALS = [
   'candle',
   'pounce',
 ];
+
+
+// Multiple first-name matches for repeat letters. The order is the reveal order.
+// Names are drawn from the character list supplied for this project.
+export const CHARACTER_POOLS = {
+  A: ['Aberforth Dumbledore', 'Alastor Moody', 'Albert Runcorn', 'Albus Dumbledore', 'Alecto Carrow', 'Alicia Spinnet', 'Amelia Bones', 'Amos Diggory', 'Amycus Carrow', 'Angelina Johnson', 'Anthony Goldstein', 'Antonin Dolohov', 'Arabella Figg', 'Aragog', 'Argus Filch', 'Ariana Dumbledore', 'Arthur Weasley', 'Astoria Greengrass', 'Aunt Marge Dursley'],
+  B: ['Bane', 'Barty Crouch Jr.', 'Barty Crouch Sr.', 'Bathilda Bagshot', 'Bellatrix Lestrange', 'Bill Weasley', 'Blaise Zabini', 'The Bloody Baron', 'Bogrod', 'Buckbeak'],
+  C: ['Cedric Diggory', 'Cho Chang', 'Colin Creevey', 'Cormac McLaggen', 'Cornelius Fudge', 'Crookshanks'],
+  D: ['Dean Thomas', 'Dedalus Diggle', 'Dobby', 'Dolores Umbridge', 'Draco Malfoy', 'Dudley Dursley'],
+  E: ['Elphias Doge', 'Emmeline Vance', 'Ernie Macmillan', 'Ernie Prang'],
+  F: ['Fang', 'The Fat Friar', 'The Fat Lady', 'Fawkes', 'Fenrir Greyback', 'Filius Flitwick', 'Firenze', 'Fleur Delacour', 'Fluffy', 'Frank Bryce', 'Fred Weasley'],
+  G: ['Gabrielle Delacour', 'Garrick Ollivander', 'Gellert Grindelwald', 'George Weasley', 'Gilderoy Lockhart', 'Ginny Weasley', 'Grawp', 'Gregory Goyle', 'Gregorovitch', 'The Grey Lady', 'Griphook'],
+  H: ['Hannah Abbott', 'Harry Potter', 'Hedwig', 'Hermione Granger', 'Horace Slughorn', 'Hugo Weasley'],
+  I: ['Igor Karkaroff', 'Irma Pince'],
+  J: ['James Potter', 'James Sirius Potter', 'John Dawlish', 'Justin Finch-Fletchley'],
+  K: ['Katie Bell', 'Kingsley Shacklebolt', 'Kreacher'],
+  L: ['Lavender Brown', 'Lee Jordan', 'Lily Luna Potter', 'Lily Potter', 'Lucius Malfoy', 'Luna Lovegood'],
+  M: ['Madam Hooch', 'Madam Malkin', 'Madam Maxime', 'Madam Pomfrey', 'Madam Rosmerta', 'Mafalda Hopkirk', 'Marcus Belby', 'Marcus Flint', 'Mary Cattermole', 'Minerva McGonagall', 'Moaning Myrtle', 'Molly Weasley', 'Mundungus Fletcher'],
+  N: ['Nagini', 'Narcissa Malfoy', 'Nearly Headless Nick', 'Neville Longbottom', 'Nigel Wolpert', 'Nymphadora Tonks'],
+  O: ['Oliver Wood'],
+  P: ['Padma Patil', 'Pansy Parkinson', 'Parvati Patil', 'Percy Weasley', 'Peter Pettigrew', 'Petunia Dursley', 'Pius Thicknesse', 'Pomona Sprout'],
+  Q: ['Quirinus Quirrell'],
+  R: ['Reg Cattermole', 'Regulus Black', 'Remus Lupin', 'Rita Skeeter', 'Romilda Vane', 'Ron Weasley', 'Rose Weasley', 'Rubeus Hagrid', 'Rufus Scrimgeour'],
+  S: ['Scabbers', 'Seamus Finnigan', 'Severus Snape', 'Sirius Black', 'Stan Shunpike', 'Sybill Trelawney'],
+  T: ['Tom the Innkeeper'],
+  V: ['Vernon Dursley', 'Viktor Krum', 'Vincent Crabbe'],
+  X: ['Xenophilius Lovegood'],
+};

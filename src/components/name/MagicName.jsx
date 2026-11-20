@@ -3,6 +3,7 @@ import { useRef, useState } from 'react';
 import { MAGIC_NAME } from '../../data/nameLetters';
 import {
   CHARACTER_LETTERS,
+  CHARACTER_POOLS,
   MAGIC_ACCENTS,
   MAGIC_REVEALS,
 } from '../../data/characterLetters';
@@ -11,23 +12,29 @@ import MagicBurst from '../MagicBurst';
 import LetterTile from './LetterTile';
 import LetterDetail from './LetterDetail';
 import './MagicName.css';
+import { updateVisitorJourney } from '../../utils/visitorJourney';
 
 const ORIGINAL_NAME = 'SHUBHAM';
 const SYMBOLS = ['✦', '📖', '🌱', '🧭', '⚡', '🕯️', '✨'];
 
 function createLetters(name) {
-  // Preserve the original custom SHUBHAM experience exactly.
-  if (name === ORIGINAL_NAME) {
-    return MAGIC_NAME.letters;
-  }
+  // Keep the handcrafted SHUBHAM sequence and its original descriptions.
+  if (name === ORIGINAL_NAME) return MAGIC_NAME.letters;
 
+  const seen = {};
   return [...name].map((letter, index) => {
     const characterData = CHARACTER_LETTERS[letter];
+    const pool = CHARACTER_POOLS[letter] || [];
+    const occurrence = seen[letter] || 0;
+    seen[letter] = occurrence + 1;
+    const character = pool.length
+      ? pool[occurrence % pool.length]
+      : characterData.character;
 
     return {
       id: `${letter.toLowerCase()}-${index}`,
       letter,
-      character: characterData.character,
+      character,
       matchType: 'initial',
       matchNote: `A Harry Potter character beginning with ${letter}`,
       trait: characterData.trait,
@@ -69,6 +76,7 @@ export default function MagicName() {
     if (cleanName.length < 2) return;
 
     setActiveName(cleanName);
+    updateVisitorJourney({ nameExplored: nameInput.trim().replace(/[^a-zA-Z]/g, '').slice(0, 12), nameCharacters: createLetters(cleanName).map((item) => item.character) });
     setSelected(null);
     setDiscovered(Array(cleanName.length).fill(false));
     setBursts([]);

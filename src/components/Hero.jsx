@@ -54,11 +54,12 @@ export default function Hero({
           <p className="eyebrow">Portfolio of</p>
 
           <h1 className="hero__title gold-text">
-            {letters.map((letter, index) => (
-              <span
-                className={index === letters.length - 1 ? 'hero__last-letter' : ''}
-                key={`${letter}-${index}`}
-              >
+           {letters.map((letter, index) => (
+  <span
+    className={index === letters.length - 1 ? 'hero__last-letter' : ''}
+    key={`${letter}-${index}`}
+    style={{ '--letter-index': index }}
+  >
                 {letter}
 
                 {index === letters.length - 1 && (

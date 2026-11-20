@@ -5,6 +5,7 @@ import { prefersReducedMotion } from '../../utils/motion';
 import QuizQuestion from './QuizQuestion';
 import QuizResult from './QuizResult';
 import './CharacterQuiz.css';
+import { updateVisitorJourney } from '../../utils/visitorJourney';
 
 // While developing, warn in the console if the quiz data has a mistake.
 if (import.meta.env.DEV) {
@@ -14,17 +15,37 @@ if (import.meta.env.DEV) {
   }
 }
 
-const TOTAL = QUESTIONS.length;
-const emptyAnswers = () => Array(TOTAL).fill(null);
+const QUESTIONS_PER_ROUND = 6;
+const pickQuestions = (previous = []) => {
+  const shuffle = (items) => {
+    const shuffled = [...items];
+    for (let i = shuffled.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+
+  let next = shuffle(QUESTIONS).slice(0, QUESTIONS_PER_ROUND);
+  const previousIds = previous.map((question) => question.id).sort().join('|');
+  let nextIds = next.map((question) => question.id).sort().join('|');
+  if (previous.length && nextIds === previousIds) {
+    next = [...next.slice(1), shuffle(QUESTIONS.filter((q) => !nextIds.includes(q.id)))[0]];
+  }
+  return next;
+};
+const emptyAnswers = (length) => Array(length).fill(null);
 
 export default function CharacterQuiz() {
-  const [answers, setAnswers] = useState(emptyAnswers);
+  const [questionSet, setQuestionSet] = useState(() => pickQuestions());
+  const TOTAL = questionSet.length;
+  const [answers, setAnswers] = useState(() => emptyAnswers(TOTAL));
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState('forward');
   const [result, setResult] = useState(null);
   const rootRef = useRef(null);
 
-  const question = QUESTIONS[index];
+  const question = questionSet[index];
   const answeredCount = answers.filter((answer) => answer !== null).length;
   const isLast = index === TOTAL - 1;
   const canAdvance = answers[index] !== null;
@@ -50,12 +71,19 @@ export default function CharacterQuiz() {
 
     // The result appears only after every question has an answer.
     if (answers.every((answer) => answer !== null)) {
-      setResult(calculateResult(answers, QUESTIONS, CHARACTERS, TIE_BREAK_ORDER));
+      const nextResult = calculateResult(answers, questionSet, CHARACTERS, TIE_BREAK_ORDER);
+      setResult(nextResult);
+      updateVisitorJourney({
+        quizCharacter: nextResult.winner.name,
+        quizHouse: HOUSES[nextResult.winner.house].label,
+      });
     }
   };
 
   const retake = () => {
-    setAnswers(emptyAnswers());
+    const nextSet = pickQuestions(questionSet);
+    setQuestionSet(nextSet);
+    setAnswers(emptyAnswers(nextSet.length));
     setIndex(0);
     setDirection('forward');
     setResult(null);
@@ -76,7 +104,7 @@ export default function CharacterQuiz() {
               Question {index + 1} of {TOTAL}
             </p>
             <ol className="quiz__dots" aria-hidden="true">
-              {QUESTIONS.map((item, i) => (
+              {questionSet.map((item, i) => (
                 <li
                   key={item.id}
                   className={`quiz__dot${answers[i] !== null ? ' is-done' : ''}${

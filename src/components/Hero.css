@@ -1,3 +1,11 @@
+
+@font-face {
+  font-family: 'Harry Potter';
+  src: url('/fonts/HARRYP__.TTF') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 .hero {
   position: relative;
   isolation: isolate;
@@ -145,6 +153,13 @@
   animation: hero-fade-up 1.4s 0.2s ease backwards;
 }
 
+
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
 .orbit::before {
   content: '';
   position: absolute;
@@ -152,13 +167,6 @@
   border-radius: 50%;
   border: 1px dashed rgba(212, 175, 55, 0.3);
   animation: hero-spin 120s linear infinite;
-}
-
-@keyframes hero-fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
 }
 
 @keyframes hero-spin {
@@ -517,9 +525,44 @@
     width: min(73vw, 310px);
   }
 
-  .hero__title {
-    font-size: clamp(2.4rem, 10vw, 4rem);
-  }
+  
+.hero__title {
+  position: relative;
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.015em;
+
+  font-family: 'Harry Potter', serif;
+  font-size: clamp(3.2rem, 9vw, 7rem);
+  font-weight: normal;
+  letter-spacing: 0.055em;
+  line-height: 1.2;
+  text-transform: uppercase;
+
+  background: linear-gradient(
+    180deg,
+    #fffdf0 0%,
+    #fff1b8 10%,
+    #f8d978 22%,
+    #e9b94f 35%,
+    #c58b2e 48%,
+    #f7df91 58%,
+    #d6a443 70%,
+    #8f5b1d 84%,
+    #eac66d 94%,
+    #fff0b5 100%
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  filter:
+    drop-shadow(0 2px 0 #59360e)
+    drop-shadow(0 0 8px rgba(255, 207, 91, 0.55))
+    drop-shadow(0 0 22px rgba(212, 165, 66, 0.35));
+}
+
 }
 
 
@@ -560,4 +603,119 @@
 
 .hero.is-intro-done .hero__spectacles::after {
   animation: spectacles-shimmer 3.5s 1.4s ease-in-out infinite;
+}
+.hero__title {
+  font-family: 'Harry Potter', serif !important;
+  font-weight: 400;
+}
+
+.hero__title.gold-text {
+  background-image: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #fff4c4 8%,
+    #ffd65c 18%,
+    #f5a623 30%,
+    #a85d12 42%,
+    #ffe18a 52%,
+    #c58a24 65%,
+    #75400e 78%,
+    #e9b84b 90%,
+    #fff2bd 100%
+  ) !important;
+
+  background-size: 100% 100% !important;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+
+  filter: drop-shadow(0 2px 2px #39200b)
+          drop-shadow(0 0 12px rgba(255, 190, 60, 0.6));
+}
+
+/* ===== SHUBHAM MAGICAL LETTER REVEAL ===== */
+
+.hero__title > span {
+  display: inline-block;
+  transform-origin: center bottom;
+
+  animation:
+    shubham-reveal 0.9s cubic-bezier(.2,.8,.2,1) both,
+    shubham-glow 4s ease-in-out infinite;
+
+  animation-delay:
+    calc(var(--letter-index) * 0.14s),
+    calc(1.2s + var(--letter-index) * 0.14s);
+}
+
+@keyframes shubham-reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(28px) rotateX(-55deg) scale(.75);
+  }
+
+  70% {
+    opacity: 1;
+    transform: translateY(-5px) rotateX(8deg) scale(1.05);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0) scale(1);
+  }
+}
+
+@keyframes shubham-glow {
+  0%, 100% {
+    filter: brightness(1);
+  }
+
+  50% {
+    filter: brightness(1.25) drop-shadow(0 0 9px rgba(255, 210, 105, .7));
+  }
+}
+
+/* ===== FLOATING SPECTACLES CYCLE ===== */
+
+.hero__spectacles {
+  animation: spectacles-cycle 5.5s ease-in-out 1.2s infinite;
+  transform-origin: center;
+}
+
+@keyframes spectacles-cycle {
+  0%, 12% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+
+  28% {
+    opacity: 0;
+    transform: translateY(-24px) rotate(-12deg) scale(.8);
+  }
+
+  68% {
+    opacity: 0;
+    transform: translateY(-24px) rotate(-12deg) scale(.8);
+  }
+
+  84% {
+    opacity: 0;
+    transform: translateY(8px) rotate(8deg) scale(.85);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__title > span,
+  .hero__spectacles,
+  .magic-object {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
 }

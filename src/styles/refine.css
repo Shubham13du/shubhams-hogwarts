@@ -279,3 +279,8 @@
     display: none;
   }
 }
+/* Remove the two oversized decorative portrait circles */
+.portrait::before,
+.frame__photo::after {
+  display: none !important;
+}
